@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>服务 / Blog - 我的简单网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">MySite</div>
+      <nav class="nav">
+        <a href="index.html#home">首页</a>
+        <a href="about.html">关于我</a>
+        <a href="services.html">服务</a>
+        <a href="contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 服务 / Blog 主内容 -->
+  <section id="services" class="section section-alt">
+    <div class="container">
+      <h2>生活记录 Blog</h2>
+      <p>
+        在项目根目录下有一个 <code>blog</code> 文件夹，你只需要把 Markdown 文件
+        （<code>.md</code>/<code>.markdown</code>）放进去，然后刷新本页面，系统会自动从
+        <code>blog</code> 文件夹中检索并显示所有文章。
+      </p>
+
+      <div class="blog-uploader">
+        <div class="blog-layout">
+          <div class="blog-preview">
+            <h3>预览</h3>
+            <div
+              id="blogPreviewContent"
+              class="markdown-body empty-state"
+            >
+              从右侧列表选择一篇文章后，这里会显示渲染后的内容。
+            </div>
+          </div>
+
+          <div class="blog-list">
+            <h3>我的 Blog</h3>
+            <ul id="blogList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 我的简单网站. 保留所有权利。</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
