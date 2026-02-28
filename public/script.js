@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const blogList = document.getElementById("blogList");
   const servicesSection = document.getElementById("services");
 
-  const BLOG_INDEX_URL = "/api/blogs";
+  // 静态部署（如 GitHub Pages）下，从 blog 目录中的 index.json 和 Markdown 文件直接读取
+  const BLOG_INDEX_URL = "blog/index.json";
+  const BLOG_CONTENT_BASE = "blog";
   let currentMarkdownText = "";
   let blogIndex = [];
 
@@ -98,7 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = item.id || item.filename;
       if (!id) return;
 
-      fetch(`${BLOG_INDEX_URL}/${encodeURIComponent(id)}/content?t=${Date.now()}`)
+      // 直接从 blog 目录读取 Markdown 文件（静态托管兼容）
+      fetch(`${BLOG_CONTENT_BASE}/${encodeURIComponent(id)}?t=${Date.now()}`)
         .then((res) => res.text())
         .then((text) => {
           currentMarkdownText = text;
