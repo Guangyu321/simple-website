@@ -25,16 +25,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderMarkdown(text) {
     if (!previewContent) return;
-    if (!text.trim()) {
-      previewContent.textContent = "从右侧列表选择一篇文章后，这里会显示渲染后的内容。";
+    if (!text || !text.trim()) {
+      previewContent.textContent =
+        "从右侧列表选择一篇文章后，这里会显示渲染后的内容。";
       previewContent.classList.add("empty-state");
       return;
     }
-    if (window.marked) {
-      previewContent.innerHTML = window.marked.parse(text);
-    } else {
+
+    try {
+      if (window.marked) {
+        // 兼容不同版本的 marked：既支持 marked.parse() 也支持直接调用 marked()
+        if (typeof window.marked.parse === "function") {
+          previewContent.innerHTML = window.marked.parse(text);
+        } else if (typeof window.marked === "function") {
+          previewContent.innerHTML = window.marked(text);
+        } else {
+          previewContent.textContent = text;
+        }
+      } else {
+        previewContent.textContent = text;
+      }
+    } catch (e) {
+      console.error("Markdown 渲染失败：", e);
       previewContent.textContent = text;
     }
+
     previewContent.classList.remove("empty-state");
   }
 
